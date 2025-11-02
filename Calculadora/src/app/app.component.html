@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-center">
+  <div class="w-50"><h1 class="text-center text-warning">Calculadora</h1></div>
+  <div class="w-50">
+    <div class="mb-3">
+      <label for="inputA" class="mx-2">Valor A</label>
+        <input type="number" id="inputA" class="form-control" [(ngModel)]="ValorA">
+    </div>
+    <div class="mb-3">
+        <label for="inputB" class="mx-2">Valor B</label>
+        <input type="number" id="inputB" class="form-control" [(ngModel)]="ValorB">
+    </div>
+    <button class="btn btn-primary me-2" (click)="Sumar()">Sumar</button>
+    <div class="mb-3">
+      <label for="">El resultado es igual a: {{Resultado}}</label>
+    </div>
+  </div>
+  <div class="w-50">
+    
+  </div>
+</div>
