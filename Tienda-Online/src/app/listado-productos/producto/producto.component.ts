@@ -10,3 +10,4 @@ export class ProductoComponent {
   inventario =
     {Descripcion: 'Chamarra', Precio: 100}
 }
+
