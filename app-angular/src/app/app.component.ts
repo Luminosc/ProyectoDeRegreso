@@ -12,6 +12,8 @@ import { ComponenteIfComponent } from './componente-if/componente-if.component';
 import { AgregarTareaComponent } from "./agregar-tarea/agregar-tarea.component";
 import { ComponenteForComponent } from "./componente-for/componente-for.component";
 import { ViewchildComponent } from "./viewchild/viewchild.component";
+import { MensajeService } from './mensaje.service';
+import { ListadoUsuariosComponent } from "./listado-usuarios/listado-usuarios.component";
 
 @Component({
   selector: 'app-root',
@@ -24,10 +26,16 @@ import { ViewchildComponent } from "./viewchild/viewchild.component";
     MostrarMensajeComponent,
     ReplicadorComponent,
     SaludarComponent,
-    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent],
+    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent, ListadoUsuariosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Hola Mundo, aquí de vuelta en Angular';
+
+  mensaje: string;
+
+  constructor(mensajeService: MensajeService){
+    this.mensaje = mensajeService.obtenerMensaje();
+  }
 }
