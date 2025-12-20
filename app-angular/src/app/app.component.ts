@@ -11,6 +11,7 @@ import { SaludarComponent } from './saludar/saludar.component';
 import { ComponenteIfComponent } from './componente-if/componente-if.component';
 import { AgregarTareaComponent } from "./agregar-tarea/agregar-tarea.component";
 import { ComponenteForComponent } from "./componente-for/componente-for.component";
+import { ViewchildComponent } from "./viewchild/viewchild.component";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ import { ComponenteForComponent } from "./componente-for/componente-for.componen
     MostrarMensajeComponent,
     ReplicadorComponent,
     SaludarComponent,
-    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent],
+    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

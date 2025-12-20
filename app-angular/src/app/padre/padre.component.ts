@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
-import { HijoComponent } from "./hijo/hijo.component";
+import { Component, ViewChild } from '@angular/core';
+import { HijoComponent } from './hijo/hijo.component';
 
 @Component({
   selector: 'app-padre',
   imports: [HijoComponent],
   templateUrl: './padre.component.html',
-  styleUrl: './padre.component.css'
+  styleUrl: './padre.component.css',
 })
 export class PadreComponent {
+  @ViewChild(HijoComponent) hijo!: HijoComponent;
 
+  mensajePadre: string = 'Mensaje desde el componente Padre';
+  //mensaje: string = '';
+  //Se emitió una cadena (string), es lo que vamos a recibir del componente hijo
+  recibirNotificacion(mensajeHijo: string) {
+    //this.mensaje = mensajeHijo;
+  }
+
+
+  cambiarMensajeHijo() {
+    this.hijo.cambiarMensaje('Hola que hace');
+  }
 }
