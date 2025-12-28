@@ -1,1 +1,5 @@
-<p>Descripción: {{inventario.Descripcion}} ¡Nuevo Producto!, Precio: {{inventario.Precio}}</p>
+<!--p>Descripción: {{inventario.Descripcion}} ¡Nuevo Producto!, Precio: {{inventario.Precio}}</p-->
+<li class="list-group-item text-center">
+    {{produc.Description}}, ${{produc.Precio}}
+    <button type="submit" class="btrn btn-info ms-4" (click)="emitirDetalleProducto()">ver detalle</button>
+</li>

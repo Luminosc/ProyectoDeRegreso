@@ -1,44 +1,34 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProductoComponent } from './producto/producto.component';
 import { producto } from './producto/producto.model';
-import { PercentPipe } from '@angular/common';
-import { log } from 'console';
 import { FormularioProductosComponent } from './formulario-productos/formulario-productos.component';
-import { elementAt } from 'rxjs';
-
+import { ServicioService } from '../Service/servicio.service';
+export interface datos {
+  producto: string;
+  precio: number;
+}
 @Component({
   selector: 'app-listado-productos',
-  imports: [ProductoComponent, FormularioProductosComponent],
+  standalone: true,
+  imports: [FormularioProductosComponent, ProductoComponent],
   templateUrl: './listado-productos.component.html',
   styleUrl: './listado-productos.component.css',
 })
 export class ListadoProductosComponent {
-  Producto: producto[] = [new producto('Chamarra', 10)];
-  @ViewChild(FormularioProductosComponent) formulario!: FormularioProductosComponent;
-  
-  /*agregarProducto(ProductoInput: String, PrecioUInput: number) {
 
-    if (
-      ProductoInput.trim() === '' ||
-      PrecioUInput == null ||
-      PrecioUInput <= 0
-    ) {
-      console.log('Valor erroneo');
-    } else {
-      this.Producto.push(new producto(ProductoInput, PrecioUInput));
-    }
-  }*/
- agregarProducto()
- {
-  if(
-    this.formulario.inputDescripcion === ''||
-    this.formulario.inputPrecio === null||
-    this.formulario.inputPrecio <= 0
-  ){
-    console.log('Valor erroneo');
-  }else{
-    this.Producto.push(new producto(this.formulario.inputDescripcion
-      ,this.formulario.inputPrecio));
+  productos: producto[] = [];
+
+  @ViewChild(FormularioProductosComponent)
+  formulario!: FormularioProductosComponent;
+
+  constructor(private servicio: ServicioService) {
+    this.servicio.detalleProductoEmiter.subscribe(
+      (producto: producto) =>
+        alert(`producto: ${producto.Description}, $${producto.Precio}`)
+    );
   }
- }
+
+  ngOnInit() {
+    this.productos = this.servicio.producto;
+  }
 }

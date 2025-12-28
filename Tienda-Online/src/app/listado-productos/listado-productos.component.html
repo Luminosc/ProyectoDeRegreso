@@ -2,13 +2,14 @@
 <div class="container mt-5">
     <h2 class="text-center">Lista de Productos</h2>
     <ul class="list-group w-50 mx-auto">
-        @for (Produc of Producto; track Produc) {
-                <li class="list-group-item text-center">{{Produc.Description}} ${{Produc.Precio}}</li>
+        @for (productoElemento of productos; track productoElemento) {
+        <app-producto [produc]="productoElemento" />
         }
+
     </ul>
     <app-formulario-productos></app-formulario-productos>
     <div class="d-flex justify-content-center">
         <!--button class="btn btn-primary w-50" (click)="agregarProducto(); DescripcionInput.value = ''; PrecioInput.value = ''">Agregar Tarea</button-->
-        <button class="btn btn-primary w-50" (click)="agregarProducto(); this.formulario.inputPrecio = 0; this.formulario.inputDescripcion = ''">Agregar Tarea</button>
+        <!--button class="btn btn-primary w-50" (click)="agregarProducto(); this.formulario.inputPrecio = 0; this.formulario.inputDescripcion = ''">Agregar Tarea</button-->
     </div>
 </div>
