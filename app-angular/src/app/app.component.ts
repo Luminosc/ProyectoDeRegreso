@@ -14,9 +14,16 @@ import { ComponenteForComponent } from "./componente-for/componente-for.componen
 import { ViewchildComponent } from "./viewchild/viewchild.component";
 import { MensajeService } from './mensaje.service';
 import { ListadoUsuariosComponent } from "./listado-usuarios/listado-usuarios.component";
+import { EjemploPipesComponent } from "./ejemplo-pipes/ejemplo-pipes.component";
+import { LOCALE_ID } from '@angular/core';
+import localEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+//Registro de datos de localización
+registerLocaleData(localEs,'es')
 
 @Component({
   selector: 'app-root',
+  providers: [{provide: LOCALE_ID, useValue: 'es'}],
   imports: [RouterOutlet,
     NewComponentComponent,
     ComponenteEnLineaComponent,
@@ -26,7 +33,7 @@ import { ListadoUsuariosComponent } from "./listado-usuarios/listado-usuarios.co
     MostrarMensajeComponent,
     ReplicadorComponent,
     SaludarComponent,
-    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent, ListadoUsuariosComponent],
+    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent, ListadoUsuariosComponent, EjemploPipesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,25 @@
+<!-- Formulario centrado -->
+    <!-- Componente: Formulario -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <form class="row g-2">
+          <div class="col-auto">
+            <select class="form-select bg-success" name="Opcion" name="Opcion" [(ngModel)]="Opcion">
+              <option value="ingresoOperacion" selected>+</option>
+              <option value="egresoOperacion">-</option>
+            </select>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control border-success" placeholder="Descripción" required name="concepto" [(ngModel)]="concepto"/>
+          </div>
+          <div class="col-auto">
+            <input type="number" class="form-control border-success" placeholder="Valor" required name="cantidad" [(ngModel)]="cantidad"/>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-success" (click)="ejecutar()">
+              <i class="bi bi-check-circle">add</i> <!-- Bootstrap Icon -->
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
