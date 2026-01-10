@@ -18,6 +18,7 @@ import { EjemploPipesComponent } from "./ejemplo-pipes/ejemplo-pipes.component";
 import { LOCALE_ID } from '@angular/core';
 import localEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { NavegacionComponent } from "./navegacion/navegacion.component";
 //Registro de datos de localización
 registerLocaleData(localEs,'es')
 
@@ -33,7 +34,7 @@ registerLocaleData(localEs,'es')
     MostrarMensajeComponent,
     ReplicadorComponent,
     SaludarComponent,
-    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent, ListadoUsuariosComponent, EjemploPipesComponent],
+    ComponenteIfComponent, AgregarTareaComponent, ComponenteForComponent, ViewchildComponent, ListadoUsuariosComponent, EjemploPipesComponent, NavegacionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
