@@ -8,16 +8,40 @@ import { producto } from '../listado-productos/producto/producto.model';
   providedIn: 'root',
 })
 export class ServicioService {
-  producto: producto[] = [
-    new producto('chamarra', 20),
-    new producto('calzones', 10),
-    new producto('sueter',25)
-  ];
 
-  detalleProductoEmiter = new EventEmitter<producto>();
+  public idSiguiente = 1;
+  producto: producto[] = [];
 
-  agregarProducto(Producto: producto){
-    this.producto.push(Producto);
+  guardarProducto(producto: producto){
+    if(producto.id === null)
+    {
+      producto.id = this.idSiguiente++;
+      this.producto.push(producto)
+    }else{
+      const indice = this.producto.findIndex(p=> p.id === producto.id)
+      if(indice !== -1){
+        this.producto[indice] = producto;
+      }
+    }
   }
-  constructor() {}
+  constructor() {
+    this.inicializarProductos()
+  }
+  inicializarProductos()
+  {
+    const producto1 = new producto(this.idSiguiente++, 'chamarra',20);
+    const producto2 = new producto(this.idSiguiente++,'calzones',10);
+    const producto3 = new producto(this.idSiguiente++, 'sueter',25);
+    this.producto.push(producto1,producto2,producto3);
+  }
+  getProductoById(id: number): producto | undefined{
+    return this.producto.find(producto => producto.id === id);
+  }
+  eliminarProducto(id: number){
+    const indice = this.producto.findIndex(producto => producto.id === id);
+    if (indice !== 1)
+    {
+      this.producto.splice(indice,1);
+    }
+  }
 }

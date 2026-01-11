@@ -1,12 +1,16 @@
-<form action="" class="d-flex justify-content-between align-items-center my-4 w-50 mx-auto" (submit)="Enviar($event)">
-    <input type="text" id="descripcion" name="descripcion"
-    placeholder="descripción de productos" class="form-control me-2 w75"
-    autocomplete="off"
-    [(ngModel)]="inputDescripcion"/>
+<form action="" class=" my-4 w-50 mx-auto" (submit)="guardarProducto($event)">
+  <div class="d-flex justify-content-between align-items-center">
+    <input type="text" id="descripcion" name="descripcion" placeholder="descripción de productos"
+      class="form-control me-2 w75" autocomplete="off" [(ngModel)]="inputDescripcion" required />
 
-    <input type="text" id="descripcion" name="descripcion"
-    placeholder="descripción de productos" class="form-control me-2 w75"
-    autocomplete="off"
-    [(ngModel)]="inputPrecio"/>
-    <button type="submit" class="btn btn-primary">Agregar</button>
+    <input type="text" id="Precio" name="Precio" placeholder="Precio de productos" class="form-control me-2 w75"
+      autocomplete="off" [(ngModel)]="inputPrecio" required />
+  </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    @if(prodcutoId !== null){
+      <button class="btn btn-danger mx 3" (click)="EliminarProducto()">Eliminar</button>
+    }
+    <button class="btn btn-warning mx-3" (click)="Cancelar()">Cancelar</button>
+  </div>
 </form>

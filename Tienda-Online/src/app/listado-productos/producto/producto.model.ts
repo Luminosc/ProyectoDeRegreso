@@ -2,7 +2,8 @@ export class producto
 {
   [x: string]: any;
   constructor(
-    public Description: String,
-    public Precio: Number
+    public id: number | null = null,
+    public Description: string,
+    public Precio: number
   ){}
 }
