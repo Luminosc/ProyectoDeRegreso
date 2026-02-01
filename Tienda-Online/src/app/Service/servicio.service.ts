@@ -1,47 +1,50 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { DatosService } from './datos.service';
+import { Injectable } from '@angular/core';
 import { producto } from '../listado-productos/producto/producto.model';
-
-
-
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServicioService {
+  productos: { [llave: string]: producto } = {};
+  productosActualizados = new Subject<{ [llave: string]: producto }>();
+  constructor(private datosService: DatosService) {}
 
-  public idSiguiente = 1;
-  producto: producto[] = [];
-
-  guardarProducto(producto: producto){
-    if(producto.id === null)
-    {
-      producto.id = this.idSiguiente++;
-      this.producto.push(producto)
+  guardarProducto(producto: producto, llave: string | null = null) {
+    if (llave === null) {
+      this.datosService.guardarProducto(producto).subscribe(() => {
+        console.log(
+          `se agrego el nueboi producto; ${producto.Description}- ${producto.Precio}`,
+        );
+        this.regresarProductos();
+      });
     }else{
-      const indice = this.producto.findIndex(p=> p.id === producto.id)
-      if(indice !== -1){
-        this.producto[indice] = producto;
-      }
+      this.datosService.modificarProducto(producto, llave).subscribe(() =>{
+        this.regresarProductos();
+      });
     }
   }
-  constructor() {
-    this.inicializarProductos()
+  regresarProductos() {
+    this.ListarProductios().subscribe((productos:{ [llave: string]: producto }) =>{
+      this.setProductos(productos);
+    });
   }
-  inicializarProductos()
-  {
-    const producto1 = new producto(this.idSiguiente++, 'chamarra',20);
-    const producto2 = new producto(this.idSiguiente++,'calzones',10);
-    const producto3 = new producto(this.idSiguiente++, 'sueter',25);
-    this.producto.push(producto1,producto2,producto3);
+  setProductos(productos: { [llave: string]: producto }){
+    this.productos = productos;
+    this.productosActualizados.next(this.productos);
   }
-  getProductoById(id: number): producto | undefined{
-    return this.producto.find(producto => producto.id === id);
+
+  ListarProductios() {
+    return this.datosService.listarProducto();
   }
-  eliminarProducto(id: number){
-    const indice = this.producto.findIndex(producto => producto.id === id);
-    if (indice !== 1)
-    {
-      this.producto.splice(indice,1);
-    }
+  getProductoByLlave(llave: string): producto | undefined {
+    return this.productos[llave];
+  }
+
+  eliminarProducto(llave: string){
+    this.datosService.eliminarProducto(llave).subscribe(() =>{
+      this.regresarProductos();
+    });
   }
 }

@@ -18,7 +18,7 @@ export const routes: Routes = [
     component: FormularioProductosComponent
   },
   {
-    path: 'editar/:id',
+    path: 'editar/:llave',
     component: FormularioProductosComponent
   },
   {

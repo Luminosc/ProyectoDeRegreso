@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { producto } from '../producto/producto.model';
 import { ServicioService } from '../../Service/servicio.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { producto } from '../producto/producto.model';
 
 @Component({
   selector: 'app-formulario-productos',
@@ -13,22 +13,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FormularioProductosComponent {
   inputDescripcion: string = '';
   inputPrecio: number | null = null;
-  prodcutoId: number | null = null;
+  llaveProducto: string | null = null;
   constructor(
-    private productoservice: ServicioService,
-    private router: Router,
-    private route: ActivatedRoute
+    private readonly productoservice: ServicioService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     //así se obtiene el ultimo ID
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      const producto = this.productoservice.getProductoById(Number(id));
-      if (producto) {
-        this.prodcutoId = producto.id;
-        (this.inputDescripcion = producto.Description),
-          (this.inputPrecio = producto.Precio);
+    const llave = this.route.snapshot.paramMap.get('llave');
+    if (llave) {
+      const Producto = this.productoservice.getProductoByLlave(llave);
+      if (Producto) {
+        this.llaveProducto = llave;
+        this.inputDescripcion = Producto.Description;
+         this.inputPrecio = Producto.Precio;
       }
     }
   }
@@ -56,21 +56,27 @@ export class FormularioProductosComponent {
     }
 
     const produc = new producto(
-      this.prodcutoId,
       this.inputDescripcion,
       this.inputPrecio
     );
-    this.productoservice.guardarProducto(produc);
+    this.productoservice.guardarProducto(produc, this.llaveProducto);
+    this.limpiarFormulario;
     this.Cancelar();
   }
   Cancelar() {
     this.router.navigate(['/']);
   }
   EliminarProducto() {
-    if(this.prodcutoId !== null)
+    if(this.llaveProducto !== null)
     {
-      this.productoservice.eliminarProducto(this.prodcutoId);
+      this.productoservice.eliminarProducto(this.llaveProducto);
       this.router.navigate(['/']);
     }
+  }
+
+  limpiarFormulario(){
+    this.llaveProducto= null;
+    this.inputDescripcion= '';
+    this.inputPrecio = null;
   }
 }
