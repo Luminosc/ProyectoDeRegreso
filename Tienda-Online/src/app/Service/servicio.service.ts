@@ -1,7 +1,7 @@
 import { DatosService } from './datos.service';
 import { Injectable } from '@angular/core';
 import { producto } from '../listado-productos/producto/producto.model';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
 export class ServicioService {
   productos: { [llave: string]: producto } = {};
   productosActualizados = new Subject<{ [llave: string]: producto }>();
-  constructor(private datosService: DatosService) {}
+  constructor(private readonly datosService: DatosService) {}
 
   guardarProducto(producto: producto, llave: string | null = null) {
     if (llave === null) {

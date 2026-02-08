@@ -4,10 +4,7 @@ import { producto } from './producto/producto.model';
 import { ServicioService } from '../Service/servicio.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-export interface datos {
-  producto: string;
-  precio: number;
-}
+
 @Component({
   selector: 'app-listado-productos',
   standalone: true,
@@ -19,7 +16,7 @@ export class ListadoProductosComponent {
   productos: {[llave:string]: producto} = {};
   productosSubscripcion: Subscription | null = null;
 
-  constructor(private servicio: ServicioService,private router: Router) {
+  constructor(private readonly servicio: ServicioService,private readonly router: Router) {
 
   }
 

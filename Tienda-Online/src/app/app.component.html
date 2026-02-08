@@ -1,2 +1,9 @@
 <h1 class="text-center">Tienda Online</h1>
+<div class="d-flex justify-content-center my-3">
+  @if(!isAutenticado()){
+    <a [routerLink]="['/login']" class="btn btn-outline-primary mx-2">Login</a>
+  }@else{
+    <a style="cursor:pointer;" class="btn btn-outline-danger mx-2" (click)="salir()">Salir</a>
+  }
+</div>
 <router-outlet></router-outlet>
