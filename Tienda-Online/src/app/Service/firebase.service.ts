@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class FirebaseService {
   firebaseConfig = {
+    apiKey: 'AIzaSyBUcR-K_hdxklX5t-30Ir5AYXFZln_mv6o',
 
     authDomain: 'tienda-online-674e7.firebaseapp.com',
 
